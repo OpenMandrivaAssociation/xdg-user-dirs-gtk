@@ -1,5 +1,5 @@
 %define name xdg-user-dirs-gtk
-%define version 0.4
+%define version 0.5
 %define release %mkrel 1
 
 Summary: XDG user dirs support for GNOME/GTK+
