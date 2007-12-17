@@ -14,7 +14,6 @@ Patch1: xdg-user-dirs-gtk-0.5-mdkfolders.patch
 License: GPL
 Group: Graphical desktop/GNOME
 Url: http://www.gnome.org/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: gtk2-devel
 BuildRequires: xdg-user-dirs
 BuildRequires: perl-XML-Parser
