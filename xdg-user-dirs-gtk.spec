@@ -1,6 +1,6 @@
 %define name xdg-user-dirs-gtk
-%define version 0.6
-%define release %mkrel 2
+%define version 0.7
+%define release %mkrel 1
 
 Summary: XDG user dirs support for GNOME/GTK+
 Name: %{name}
@@ -8,7 +8,7 @@ Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/xdg-user-dirs-gtk/%{name}-%{version}.tar.bz2
 # (fc) 0.5-2mdv add KDE info to desktop file
-Patch0: xdg-user-dirs-gtk-0.5-kde.patch
+Patch0: xdg-user-dirs-gtk-0.7-kde.patch
 # (fc) 0.5-2mdv detect mdk-folders entries in gtk bookmarks and replace them with standard entries
 Patch1: xdg-user-dirs-gtk-0.5-mdkfolders.patch
 License: GPL
