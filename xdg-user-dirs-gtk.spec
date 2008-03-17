@@ -1,6 +1,6 @@
 %define name xdg-user-dirs-gtk
 %define version 0.7
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary: XDG user dirs support for GNOME/GTK+
 Name: %{name}
@@ -17,7 +17,7 @@ Url: http://www.gnome.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: gtk2-devel
 BuildRequires: xdg-user-dirs
-BuildRequires: perl-XML-Parser
+BuildRequires: perl(XML::Parser)
 Requires: xdg-user-dirs
 
 
@@ -41,27 +41,27 @@ It gets run during login and does two things:
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 %find_lang %name
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/autostart
-install -m644 user-dirs-update-gtk.desktop $RPM_BUILD_ROOT%{_datadir}/autostart
+mkdir -p %{buildroot}%{_datadir}/autostart
+install -m644 user-dirs-update-gtk.desktop %{buildroot}%{_datadir}/autostart
 
-mkdir -p $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d
-cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/xdg-user-dirs-update-gtk <<EOF
+mkdir -p %{buildroot}%_sysconfdir/X11/xinit.d
+cat > %{buildroot}%_sysconfdir/X11/xinit.d/xdg-user-dirs-update-gtk <<EOF
 #!/bin/sh
 DESKTOP=\$1
 case \$DESKTOP in
-   GNOME|KDE) exit 0;;
+   GNOME|KDE|xfce4) exit 0;;
    *) exec /usr/bin/xdg-user-dirs-gtk-update ;;
 esac
 EOF
 
-chmod +x $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/xdg-user-dirs-update-gtk 
+chmod +x %{buildroot}%_sysconfdir/X11/xinit.d/xdg-user-dirs-update-gtk 
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files -f %name.lang
 %defattr(-,root,root)
