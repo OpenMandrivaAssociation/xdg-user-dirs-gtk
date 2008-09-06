@@ -17,7 +17,7 @@ Url: http://www.gnome.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: gtk2-devel
 BuildRequires: xdg-user-dirs
-BuildRequires: perl(XML::Parser)
+BuildRequires: intltool
 Requires: xdg-user-dirs
 
 
