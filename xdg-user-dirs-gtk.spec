@@ -1,25 +1,20 @@
-%define name xdg-user-dirs-gtk
-%define version 0.8
-%define release %mkrel 1
-
-Summary: XDG user dirs support for GNOME/GTK+
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: ftp://ftp.gnome.org/pub/GNOME/sources/xdg-user-dirs-gtk/%{name}-%{version}.tar.bz2
+Summary:	XDG user dirs support for GNOME/GTK+
+Name:		xdg-user-dirs-gtk
+Version:	0.8
+Release:	%mkrel 2
+License:	GPLv2+
+Group:		Graphical desktop/GNOME
+Url:		http://www.gnome.org/
+Source0:	http://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/%{version}/%{name}-%{version}.tar.bz2
 # (fc) 0.5-2mdv add KDE info to desktop file
-Patch0: xdg-user-dirs-gtk-0.7-kde.patch
+Patch0:		xdg-user-dirs-gtk-0.7-kde.patch
 # (fc) 0.5-2mdv detect mdk-folders entries in gtk bookmarks and replace them with standard entries
-Patch1: xdg-user-dirs-gtk-0.5-mdkfolders.patch
-License: GPL
-Group: Graphical desktop/GNOME
-Url: http://www.gnome.org/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: gtk2-devel
-BuildRequires: xdg-user-dirs
-BuildRequires: intltool
-Requires: xdg-user-dirs
-
+Patch1:		xdg-user-dirs-gtk-0.5-mdkfolders.patch
+BuildRequires:	gtk2-devel
+BuildRequires:	xdg-user-dirs
+BuildRequires:	intltool
+Requires:	xdg-user-dirs
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 xdg-user-dirs-gtk is a companion to xdg-user-dirs that integrates it into
@@ -43,13 +38,14 @@ It gets run during login and does two things:
 %install
 rm -rf %{buildroot}
 %makeinstall_std
-%find_lang %name
+
+%find_lang %{name}
 
 mkdir -p %{buildroot}%{_datadir}/autostart
 install -m644 user-dirs-update-gtk.desktop %{buildroot}%{_datadir}/autostart
 
-mkdir -p %{buildroot}%_sysconfdir/X11/xinit.d
-cat > %{buildroot}%_sysconfdir/X11/xinit.d/xdg-user-dirs-update-gtk <<EOF
+mkdir -p %{buildroot}%{_sysconfdir}/X11/xinit.d
+cat > %{buildroot}%{_sysconfdir}/X11/xinit.d/xdg-user-dirs-update-gtk <<EOF
 #!/bin/sh
 DESKTOP=\$1
 case \$DESKTOP in
@@ -58,15 +54,15 @@ case \$DESKTOP in
 esac
 EOF
 
-chmod +x %{buildroot}%_sysconfdir/X11/xinit.d/xdg-user-dirs-update-gtk 
+chmod +x %{buildroot}%{_sysconfdir}/X11/xinit.d/xdg-user-dirs-update-gtk 
 
 %clean
 rm -rf %{buildroot}
 
-%files -f %name.lang
+%files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog README NEWS
-%config(noreplace) %_sysconfdir/xdg/autostart/user-dirs-update-gtk.desktop
-%config(noreplace) %_sysconfdir/X11/xinit.d/xdg-user-dirs-update-gtk 
-%_datadir/autostart/user-dirs-update-gtk.desktop
-%_bindir/xdg-user-dirs-gtk-update
+%config(noreplace) %{_sysconfdir}/xdg/autostart/user-dirs-update-gtk.desktop
+%config(noreplace) %{_sysconfdir}/X11/xinit.d/xdg-user-dirs-update-gtk 
+%{_bindir}/xdg-user-dirs-gtk-update
+%{_datadir}/autostart/user-dirs-update-gtk.desktop
