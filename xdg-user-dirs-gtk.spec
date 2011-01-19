@@ -1,7 +1,7 @@
 Summary:	XDG user dirs support for GNOME/GTK+
 Name:		xdg-user-dirs-gtk
 Version:	0.8
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 Url:		http://www.gnome.org/
@@ -49,7 +49,7 @@ cat > %{buildroot}%{_sysconfdir}/X11/xinit.d/xdg-user-dirs-update-gtk <<EOF
 #!/bin/sh
 DESKTOP=\$1
 case \$DESKTOP in
-   GNOME|KDE|xfce4) exit 0;;
+   GNOME|KDE*|xfce4) exit 0;;
    *) exec /usr/bin/xdg-user-dirs-gtk-update ;;
 esac
 EOF
