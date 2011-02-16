@@ -1,7 +1,7 @@
 Summary:	XDG user dirs support for GNOME/GTK+
 Name:		xdg-user-dirs-gtk
 Version:	0.8
-Release:	%mkrel 8
+Release:	%mkrel 9
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 Url:		http://www.gnome.org/
@@ -41,18 +41,6 @@ rm -rf %{buildroot}
 
 %find_lang %{name}
 
-mkdir -p %{buildroot}%{_sysconfdir}/X11/xinit.d
-cat > %{buildroot}%{_sysconfdir}/X11/xinit.d/xdg-user-dirs-update-gtk <<EOF
-#!/bin/sh
-DESKTOP=\$1
-case \$DESKTOP in
-   GNOME|KDE*|xfce4|LXDE) exit 0;;
-   *) exec /usr/bin/xdg-user-dirs-gtk-update ;;
-esac
-EOF
-
-chmod +x %{buildroot}%{_sysconfdir}/X11/xinit.d/xdg-user-dirs-update-gtk 
-
 %clean
 rm -rf %{buildroot}
 
@@ -60,5 +48,4 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog README NEWS
 %config(noreplace) %{_sysconfdir}/xdg/autostart/user-dirs-update-gtk.desktop
-%config(noreplace) %{_sysconfdir}/X11/xinit.d/xdg-user-dirs-update-gtk 
 %{_bindir}/xdg-user-dirs-gtk-update
