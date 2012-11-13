@@ -1,0 +1,64 @@
+--- xdg-user-dirs-gtk-0.6/update.c.mdkfolders	2007-07-03 10:40:34.000000000 +0200
++++ xdg-user-dirs-gtk-0.6/update.c	2007-09-28 17:39:36.000000000 +0200
+@@ -210,6 +210,8 @@ update_locale (XdgDirEntry *old_entries)
+ 	  /* Change succeeded, remove any leftover empty directories */
+ 	  for (i = 0; old_entries[i].type != NULL; i++)
+ 	    {
++	      char *dot_directory;
++
+ 	      /* Never remove homedir */
+ 	      if (strcmp (old_entries[i].path, g_get_home_dir ()) == 0)
+ 		continue;
+@@ -219,6 +221,13 @@ update_locale (XdgDirEntry *old_entries)
+ 	      if (entry)
+ 		continue;
+ 
++	      /* remove leftover of .directory from mdk-folders */
++	      dot_directory = g_build_filename (old_entries[i].path, "/.directory", NULL);
++	      if (g_file_test (dot_directory, G_FILE_TEST_IS_REGULAR))
++	          g_unlink (dot_directory);
++
++	      g_free (dot_directory);
++
+ 	      /* Remove the dir, will fail if not empty */
+ 	      g_rmdir (old_entries[i].path);
+ 	    }
+@@ -279,7 +288,37 @@ main (int argc, char *argv[])
+   bookmarks = parse_gtk_bookmarks (NULL);
+ 
+   modified_bookmarks = FALSE;
+-  if (bookmarks == NULL)
++
++
++  /* Drop any mdk-folder bookmarks if found */
++  if (bookmarks != NULL) {
++      char *mdk_folders;
++      GList *copy;
++
++      mdk_folders = g_strconcat (g_get_home_dir (), "/.mdk-folders/", NULL);
++      copy = g_list_copy (bookmarks);
++      for (l = copy; l != NULL; l = l->next)
++	{
++	  char *path;
++	  GList *prev;
++	  
++	  bookmark = l->data;
++	  path = g_filename_from_uri (bookmark->uri, NULL, NULL);
++	  if (path) {
++		if (g_str_has_prefix (path, mdk_folders)) {
++			modified_bookmarks = TRUE;
++			g_free (bookmark->uri);
++			g_free (bookmark->label);
++			bookmarks = g_list_remove (bookmarks, bookmark);
++		}
++	  }
++	  g_free (path);
++        }
++      g_list_free (copy);
++  }
++
++  /* add default directories if we migrated mdk folders */
++  if (bookmarks == NULL || modified_bookmarks)
+     {
+       char *make_bm_for[] = {
+ 	"DOCUMENTS",
