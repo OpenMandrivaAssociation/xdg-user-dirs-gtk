@@ -1,4 +1,2 @@
-removed_sources:
-  xdg-user-dirs-gtk-0.8.tar.bz2: f454f6d32375e19497316f2bcb297da49bceb10e
 sources:
-  xdg-user-dirs-gtk-0.10.tar.xz: 7af51ac84ca269377a9699482e43a03b87d4277c
+  xdg-user-dirs-gtk-0.11.tar.xz: 4327e083be37370b18f44a54c3ff490839a7617c
