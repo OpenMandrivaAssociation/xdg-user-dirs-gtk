@@ -4,7 +4,7 @@ Version:	0.11
 Release:	2
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
-Url:		http://www.gnome.org/
+Url:		https://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/%{version}/%{name}-%{version}.tar.xz
 BuildRequires:	gtk+3-devel
 BuildRequires:	xdg-user-dirs
