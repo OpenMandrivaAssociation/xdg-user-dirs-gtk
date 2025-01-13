@@ -1,0 +1,17 @@
+ meson_custom_install_desktop_file.sh | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git c/meson_custom_install_desktop_file.sh i/meson_custom_install_desktop_file.sh
+index 0c5fb7b..304e90e 100644
+--- c/meson_custom_install_desktop_file.sh
++++ i/meson_custom_install_desktop_file.sh
+@@ -2,7 +2,7 @@
+ 
+ set -eu
+ 
+-mkdir -p "${MESON_INSTALL_DESTDIR_PREFIX}/data/applications/"
++mkdir -p "${MESON_INSTALL_DESTDIR_PREFIX}/share/applications/"
+ cp "${DESTDIR}/etc/xdg/autostart/user-dirs-update-gtk.desktop" \
+-   "${MESON_INSTALL_DESTDIR_PREFIX}/data/applications/user-dirs-update-gtk.desktop"
++   "${MESON_INSTALL_DESTDIR_PREFIX}/share/applications/user-dirs-update-gtk.desktop"
+ 
