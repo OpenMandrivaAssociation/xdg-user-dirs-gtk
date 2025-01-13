@@ -1,14 +1,15 @@
 Summary:	XDG user dirs support for GNOME/GTK+
 Name:		xdg-user-dirs-gtk
-Version:	0.11
-Release:	2
+Version:	0.12
+Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/%{version}/%{name}-%{version}.tar.xz
-BuildRequires:	gtk+3-devel
+BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	xdg-user-dirs
 BuildRequires:	intltool
+BuildRequires:	meson
 Requires:	xdg-user-dirs
 
 %description
@@ -22,19 +23,14 @@ It gets run during login and does two things:
   on a set of xdg user dirs.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
-sed -i \
-	-e '/Encoding/d' \
-	-e 's:OnlyShowIn=GNOME;LXDE;Unity;:NotShowIn=KDE;:' \
-	user-dirs-update-gtk.desktop.in || die
-
-%configure
-%make
+%meson
+%meson_build
 
 %install
-%makeinstall_std
+%meson_install
 
 %find_lang %{name}
 
