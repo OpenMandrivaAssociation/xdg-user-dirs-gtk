@@ -5,7 +5,8 @@ Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://www.gnome.org/
-Source0:	http://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/%{version}/%{name}-%{version}.tar.xz
+Source0:	https://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/%{version}/%{name}-%{version}.tar.xz
+Patch0:  fix-install-path.patch
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	xdg-user-dirs
 BuildRequires:	intltool
@@ -37,4 +38,5 @@ It gets run during login and does two things:
 %files -f %{name}.lang
 %doc AUTHORS ChangeLog README NEWS
 %config(noreplace) %{_sysconfdir}/xdg/autostart/user-dirs-update-gtk.desktop
+%{_datadir}/applications/user-dirs-update-gtk.desktop
 %{_bindir}/xdg-user-dirs-gtk-update
