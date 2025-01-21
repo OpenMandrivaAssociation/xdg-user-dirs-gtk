@@ -1,12 +1,11 @@
 Summary:	XDG user dirs support for GNOME/GTK+
 Name:		xdg-user-dirs-gtk
-Version:	0.12
+Version:	0.14
 Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/GNOME
 Url:		https://www.gnome.org/
 Source0:	https://ftp.gnome.org/pub/gnome/sources/xdg-user-dirs-gtk/%{version}/%{name}-%{version}.tar.xz
-Patch0:  fix-install-path.patch
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	xdg-user-dirs
 BuildRequires:	intltool
