@@ -39,3 +39,4 @@ It gets run during login and does two things:
 %config(noreplace) %{_sysconfdir}/xdg/autostart/user-dirs-update-gtk.desktop
 %{_datadir}/applications/user-dirs-update-gtk.desktop
 %{_bindir}/xdg-user-dirs-gtk-update
+%{_userunitdir}/user-dirs-update-gtk.service
